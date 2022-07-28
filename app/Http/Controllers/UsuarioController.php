@@ -16,7 +16,7 @@ class UsuarioController extends Controller
     {
         $usuario = Http::withToken(env('TOKEN'))->get('https://gorest.co.in/public/v2/users');
         $usuarios = $usuario->json();
-        return view('usuario.index', compact('usuarios'));
+        return view('usuario.index');
     }
 
     /**
@@ -26,7 +26,7 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        //
+        return view('usuario.create');
     }
 
     /**
@@ -37,7 +37,7 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**
