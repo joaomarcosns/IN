@@ -16,7 +16,7 @@ class UsuarioTest extends TestCase
     public function test_user_creation_with_no_name()
     {
         /** 
-         * Testing user registry with invalid nome
+         * Testing user registry with no nome
         */
         $response = $this->post(route('usuario.store'), [
             "nome" => "",
@@ -28,10 +28,40 @@ class UsuarioTest extends TestCase
         $response->assertStatus(302);
 
     }
+    public function test_create_user_with_invalid_name()
+    {
+        /** 
+         * Testing user registry with invalid nome
+        */
+        $response = $this->post(route('usuario.store'), [
+            "nome" => 12345,
+            "email" => "teste@gmail.com",
+            "gender" => "female",
+            "status" => "inactive",
+        ]);
+        
+        $response->assertStatus(302);
+
+    }
+    public function test_create_user_with_invalid_email()
+    {
+        /** 
+         * Testing user registry with invalid nome
+        */
+        $response = $this->post(route('usuario.store'), [
+            "nome" => "teste",
+            "email" => "teste",
+            "gender" => "female",
+            "status" => "inactive",
+        ]);
+        
+        $response->assertStatus(302);
+
+    }
     public function test_user_creation_with_no_email()
     {
         /** 
-         * Testing user registry with invalid email
+         * Testing user registry with no email
         */
         $response = $this->post(route('usuario.store'), [
             "nome" => "teste",
@@ -46,7 +76,7 @@ class UsuarioTest extends TestCase
     public function test_user_creation_with_no_gender()
     {
         /** 
-         * Testing user registry with invalid gender
+         * Testing user registry with no gender
         */
         $response = $this->post(route('usuario.store'), [
             "nome" => "teste",
@@ -61,7 +91,7 @@ class UsuarioTest extends TestCase
     public function test_user_creation_with_no_status()
     {
         /** 
-         * Testing user registry with invalid status
+         * Testing user registry with no status
         */
         $response = $this->post(route('usuario.store'), [
             "nome" => "teste",
