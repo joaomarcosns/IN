@@ -17,7 +17,7 @@ class UsuarioController extends Controller
     {
         $usuario = Http::withToken(env('TOKEN'))->get('https://gorest.co.in/public/v2/users');
         $usuarios = $usuario->json();
-        return view('usuario.index');
+        return view('usuario.index', compact('usuarios'));
     }
 
     /**
