@@ -32,6 +32,16 @@
         </div>
     </nav>
     <div class="container">
+        @if (session()->has('sucesso'))
+            <div class="alert alert-success pt-2">
+                {{ session()->get('sucesso') }}
+            </div>
+        @endif
+        @if (session()->has('error'))
+            <div class="alert alert-danger">
+                {{ session()->get('error') }}
+            </div>
+        @endif
         @yield('content')
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>

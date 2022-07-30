@@ -38,7 +38,19 @@ class UsuarioController extends Controller
      */
     public function store(UsuarioRequest $request)
     {
-        dd($request->all());
+        try {
+            $usuario = Http::withToken(env('TOKEN'))->post('https://gorest.co.in/public/v2/users', [
+                "name" => $request->nome,
+                "email" => $request->email,
+                "gender" => $request->gender,
+                "status" => $request->status,
+            ]);
+            session()->put('usuario', $usuario->json());
+            return redirect()->back()->with('sucesso', 'Usuário cadastrado com sucesso');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Erro ao cadastrar o usuário');
+        }
+
     }
 
     /**
