@@ -15,10 +15,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        // $id = session()->get('usuario')['id'];
-        // $post = Http::withToken(env('TOKEN'))->get("https://gorest.co.in/public/v2/users/$id/posts");
-        // $posts = $post->json();
-
+        $id = session()->get('usuario')['id'];
+        $post = Http::withToken(env('TOKEN'))->get("https://gorest.co.in/public/v2/users/$id/posts");
+        $posts = $post->json();
+        dd($posts);
         return view('post.index');
 
     }
@@ -42,7 +42,16 @@ class PostController extends Controller
      */
     public function store(PostReuest $request)
     {
-        dd($request->all());
+        try {
+            $post = Http::withToken(env('TOKEN'))->post("https://gorest.co.in/public/v2/posts",[
+                "user_id" => $request->user_id,
+                "title" => $request->title,
+                "body" => $request->body,
+            ]);
+            return redirect()->route('post.index')->with('sucesso', 'Post realizado com sucesso');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Erro ao cadastrado o Post');
+        }
     }
 
     /**
