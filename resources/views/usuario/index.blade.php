@@ -8,23 +8,36 @@
         </div>
         <hr>
         @foreach ($usuarios as $usuario)
-            <div class="col-md-6 pt-2 pb-2">
-                <ul class="list-group">
-                    @if (session()->get('usuario') !== null && session()->get('usuario')['id'] == $usuario['id'])
-                        <li
-                            class="list-group-item {{ $usuario['status'] == 'active' ? 'bg-primary' : 'bg-danger' }} text-white">
-                            {{ $usuario['name'] }} Você
-                        </li>
-                    @else
+            @if (session()->get('usuario') !== null && session()->get('usuario')['id'] == $usuario['id'])
+                <a href="{{route('usuario.edit', array('id' => $usuario['id']))}}" style="text-decoration: none">
+                    <div class="col-md-6 pt-2 pb-2">
+                        <ul class="list-group">
+                            <li
+                                class="list-group-item {{ $usuario['status'] == 'active' ? 'bg-primary' : 'bg-danger' }} text-white">
+                                {{ $usuario['name'] }} Você
+                            </li>
+                            <li class="list-group-item">E-mail: {{ $usuario['email'] }}</li>
+                            <li class="list-group-item">Gênero sexual:
+                                {{ $usuario['gender'] == 'male' ? 'Homem' : 'Mulher' }}</li>
+                            <li class="list-group-item">Status: {{ $usuario['status'] == 'active' ? ' Ativo' : 'Inativo' }}
+                            </li>
+                        </ul>
+                    </div>
+                </a>
+            @else
+                <div class="col-md-6 pt-2 pb-2">
+                    <ul class="list-group">
                         <li class="list-group-item {{ $usuario['status'] == 'active' ? 'bg-primary' : 'bg-danger' }} text-white">
                             {{ $usuario['name'] }}
                         </li>
-                    @endif
-                    <li class="list-group-item">E-mail: {{ $usuario['email'] }}</li>
-                    <li class="list-group-item">Gênero sexual: {{ $usuario['gender'] == 'male' ? 'Homem' : 'Mulher' }}</li>
-                    <li class="list-group-item">Status: {{ $usuario['status'] == 'active' ? ' Ativo' : 'Inativo' }}</li>
-                </ul>
-            </div>
+                        <li class="list-group-item">E-mail: {{ $usuario['email'] }}</li>
+                        <li class="list-group-item">Gênero sexual: {{ $usuario['gender'] == 'male' ? 'Homem' : 'Mulher' }}
+                        </li>
+                        <li class="list-group-item">Status: {{ $usuario['status'] == 'active' ? ' Ativo' : 'Inativo' }}
+                        </li>
+                    </ul>
+                </div>
+            @endif
         @endforeach
     </div>
 @endsection

@@ -72,7 +72,9 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
-        //
+        $usuario = Http::withToken(env('TOKEN'))->get("https://gorest.co.in/public/v2/users/$id");
+        $usuarios = $usuario->json();
+        return view('usuario.edit', compact('usuarios'));
     }
 
     /**
