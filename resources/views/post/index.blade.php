@@ -13,7 +13,7 @@
                     <li class="list-group-item text-center">{{$post['title']}}</li>
                     <li class="list-group-item">Autor {{$user['name']}}</li>
                     <li class="list-group-item">
-                        <a href="" class="primary" style="text-decoration: none">Ver...</a>
+                        <a href="{{route('post.show', array('id' => $post['id']))}}" class="primary" style="text-decoration: none">Ver mais...</a>
                     </li>
                 </ul>
             </div>

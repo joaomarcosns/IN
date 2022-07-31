@@ -42,8 +42,11 @@ class PostController extends Controller
      */
     public function store(PostReuest $request)
     {
+        if ( session()->get('usuario')['status'] == 'inactive') {
+            return redirect()->route('post.index')->with('error', 'Esse usuário esta inativo');
+        }
         try {
-            $post = Http::withToken(env('TOKEN'))->post("https://gorest.co.in/public/v2/posts",[
+            Http::withToken(env('TOKEN'))->post("https://gorest.co.in/public/v2/posts",[
                 "user_id" => $request->user_id,
                 "title" => $request->title,
                 "body" => $request->body,
@@ -62,7 +65,15 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $usuario = session()->get('usuario');
+            $post = Http::withToken(env('TOKEN'))->get("https://gorest.co.in/public/v2/posts/$id");
+            $comment = Http::withToken(env('TOKEN'))->get("https://gorest.co.in/public/v2/posts/$id/comments");
+            $comments = $comment->json();
+            return view('post.show', compact('post', 'usuario', 'comments'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Erro ao listar o Post');
+        }
     }
 
     /**

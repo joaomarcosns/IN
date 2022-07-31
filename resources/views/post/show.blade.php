@@ -4,59 +4,71 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="mt-4">Post Title</h1>
+            <h1 class="mt-4">{{ $post['title'] }}</h1>
             <p class="lead">
-                by tetse
+                De {{ $usuario['name'] }}
             </p>
             <hr>
-            <p class="lead">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident dicta at optio
-                dolorum? Maxime iusto
-                cum harum neque quaerat inventore aliquam. Ea et modi ipsa quod corporis earum nulla quasi?</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, harum possimus illo necessitatibus,
-                modi
-                vero eos soluta error earum perspiciatis voluptatem, consectetur minus dolor voluptates? Delectus
-                voluptate hic fugiat quaerat?</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam veritatis eligendi, voluptatem id culpa
-                totam illum dolorem omnis a consequatur sequi sed minus assumenda distinctio perferendis cupiditate,
-                doloribus nulla nemo.</p>
+            <h2>Descrição</h2>
+            <p class="lead">
+                {{ $post['body'] }}
+            </p>
             <hr>
             <div class="card mb-5">
                 <h5 class="card-header">Deixe aqui o seu comentário:</h5>
                 <div class="card-body">
-                    <form>
+                    <form method="POST" action="{{ route('comentario.store') }}">
+                        @csrf
+                        <input type="hidden" name="post_id" value="{{ $post['id'] }}">
                         <div class="mb-3">
-                            <label for="nome" class="form-label">E-mail</label>
-                            <input type="text" class="form-control" id="nome" name="name" 
-                            placeholder="name example de com">
+                            <label for="nome" class="form-label">Nome</label>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="nome"
+                                name="name" placeholder="name example de com">
+                            @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">E-mail</label>
-                            <input type="email" class="form-control" id="email"
-                                placeholder="name@example.com">
+                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email"
+                                placeholder="name@example.com" name="email">
+                            @error('email')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label for="comentario" class="form-label">Comentário</label>
-                            <textarea class="form-control" id="comentario" name='body' placeholder="Deixe aqui seu comentário" rows="3"></textarea>
+                            <textarea class="form-control @error('body') is-invalid @enderror" id="comentario" name='body'
+                                placeholder="Deixe aqui seu comentário" rows="3"></textarea>
+                            @error('body')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <button type="submit" class="btn btn-primary mt-2">Enviar</button>
                     </form>
                 </div>
             </div>
-            <hr>
-            <div class="mb-4">
-                <div class="profile-pic mr-3 bg-light">
-                    <i class="fa fa-user fa-2x"></i>
-                </div>
-                <div class="">
-                    <h5 class="mt-0">User Name</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur repellat quod
-                        consequuntur
-                        velit vitae molestiae odit iure sit repellendus aut. Ex voluptatum alias fugiat, praesentium
-                        vero ratione qui earum eligendi.</p>
-                </div>
+            <div class=" d-flex justify-content-end">
+                <i class="fas fa-comment fa-2x"></i>
+                <p class="ms-2">({{ count($comments) }})</p>
             </div>
-            <hr>
-            <div class="mb-4">
+            @forelse ($comments as $item)
+                <hr>
+                <div class="mb-4">
+                    <div class="profile-pic mr-3 bg-light">
+                        <i class="fa fa-user fa-2x"></i>
+                    </div>
+                    <div class="">
+                        <h5 class="mt-0">{{ $item['name'] }} - {{ $item['email'] }}</h5>
+                        <p>{{ $item['body'] }}</p>
+                    </div>
+                </div>
+                <hr>
+            @empty
+                <h5 class="text-center">Sem comnetarios</h5>
+            @endforelse
+
+            {{-- <div class="mb-4">
                 <div class="profile-pic mr-3 bg-light">
                     <i class="fa fa-user fa-2x"></i>
                 </div>
@@ -80,7 +92,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <hr>
         </div>
     </div>
