@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostReuest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -14,8 +15,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        // $usuario = session()->get('usuario')['id'];
-        // $post = Http::withToken(env('TOKEN'))->get("https://gorest.co.in/public/v2/posts/");
+        // $id = session()->get('usuario')['id'];
+        // $post = Http::withToken(env('TOKEN'))->get("https://gorest.co.in/public/v2/users/$id/posts");
         // $posts = $post->json();
 
         return view('post.index');
@@ -29,7 +30,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $user_id = session()->get('usuario')['id'];
+        return view('post.create', compact('user_id'));
     }
 
     /**
@@ -38,9 +40,9 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostReuest $request)
     {
-        //
+        dd($request->all());
     }
 
     /**

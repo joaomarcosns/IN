@@ -9,7 +9,11 @@
     <hr>
         <div class="col-md-6 pt-2 pb-2">
             <ul class="list-group">
-                <li class="list-group-item">TEste</li>
+                <li class="list-group-item text-center">Titulo</li>
+                <li class="list-group-item">Autor</li>
+                <li class="list-group-item">
+                    <a href="#" class="primary" style="text-decoration: none">Ver...</a>
+                </li>
             </ul>
         </div>
 </div>
