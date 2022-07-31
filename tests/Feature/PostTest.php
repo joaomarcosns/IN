@@ -19,7 +19,7 @@ class PostTest extends TestCase
          * Testing post registry with no titulo
         */
         $response = $this->post(route('post.store'), [
-            "titulo" => 7484,
+            "title" => 7484,
             "user_id" => "4725",
             "body" => "ashdafsdghkjl;"
         ]);
@@ -33,7 +33,7 @@ class PostTest extends TestCase
          * Testing post registry with no body
         */
         $response = $this->post(route('post.store'), [
-            "titulo" => "Teste",
+            "title" => "Teste",
             "user_id" => "4725",
             "body" => 185151
         ]);

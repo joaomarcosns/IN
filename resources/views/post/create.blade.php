@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="col">
                             <label for="title">Titulo</label>
-                            <input type="text" class="form-control @error('titulo') is-invalid @enderror" name="titulo"
+                            <input type="text" class="form-control @error('titulo') is-invalid @enderror" name="title"
                                 id="title" placeholder="Fulano de Tal fez" aria-label="Fulano de Fulano de Tal fe" >
                             @error('title')
                                 <div class="alert alert-danger">{{ $message }}</div>

@@ -24,7 +24,7 @@ class PostReuest extends FormRequest
     public function rules()
     {
         return [
-            "titulo" => ['required', 'string'],
+            "title" => ['required', 'string'],
             "body" => ['required', 'string']
         ];
     }
@@ -32,10 +32,10 @@ class PostReuest extends FormRequest
     public function messages()
     {
         return [
-            'titulo.required' => "O :attribute é obrigatório.",
-            'titulo.string' => "O :attribute deve ser apenas caracteres.",
-            'body.required' => "O :attribute é obrigatório.",
-            'body.string' => "O :attribute deve ser apenas caracteres.",
+            'title.required' => "O Titulo é obrigatório.",
+            'title.string' => "O Titulo deve ser apenas caracteres.",
+            'body.required' => "O Descrição é obrigatório.",
+            'body.string' => "O Descrição deve ser apenas caracteres.",
         ];
         
     }
