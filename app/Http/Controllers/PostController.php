@@ -15,11 +15,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        $id = session()->get('usuario')['id'];
+        $user = session()->get('usuario');
+        $id = $user['id'];
         $post = Http::withToken(env('TOKEN'))->get("https://gorest.co.in/public/v2/users/$id/posts");
         $posts = $post->json();
-        dd($posts);
-        return view('post.index');
+        return view('post.index', compact('posts', 'user'));
 
     }
 
