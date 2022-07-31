@@ -24,7 +24,7 @@ Route::controller(UsuarioController::class)->name('usuario.')->prefix('usuario')
     Route::get('/create', 'create')->name('create');    
     Route::post('/store', 'store')->name('store');   
     Route::get('/edit/{id}', 'edit')->name('edit');    
-    Route::put('/update', 'update')->name('update');
+    Route::put('/update/{id}', 'update')->name('update');
 });
 
 Route::controller(PostController::class)->name('post.')->prefix('post')->group(function () {

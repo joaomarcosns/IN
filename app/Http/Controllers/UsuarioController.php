@@ -50,7 +50,6 @@ class UsuarioController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Erro ao cadastrar o usuário');
         }
-
     }
 
     /**
@@ -84,9 +83,20 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UsuarioRequest $request, $id)
     {
-        //
+        try {
+            $usuario = Http::withToken(env('TOKEN'))->put("https://gorest.co.in/public/v2/users/$id", [
+                "name" => $request->nome,
+                "email" => $request->email,
+                "gender" => $request->gender,
+                "status" => $request->status,
+            ]);
+            session()->put('usuario', $usuario->json());
+            return redirect()->route('usuario.index')->with('sucesso', 'Usuário atualizado com sucesso');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Erro ao atualizar o usuário');
+        }
     }
 
     /**

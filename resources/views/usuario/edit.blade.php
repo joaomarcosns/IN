@@ -5,10 +5,11 @@
     <div class="justify-content-center align-content-center pt-5">
         <div class="card">
             <div class="card-header">
-                Atualizar Usuarios
+                Atualizar o Usuarios
             </div>
             <div class="card-body">
-                <form method="POST" action="{{ route('usuario.update') }}">
+                <form method="POST" action="{{ route('usuario.update', array('id' => $usuarios['id'])) }}">
+                    @method('PUT')
                     @csrf
                     <div class="row">
                         <div class="col">
@@ -33,7 +34,7 @@
                             <label for="gender">Genero Sexual</label>
                             <select name="gender" id="gender" class="form-control @error('gender') is-invalid @enderror"
                                 >
-                                <option value="male" {{$usuarios['gender'] == 'male' ? ' selected' : '' }}>Male</option>Homem</option>
+                                <option value="male" {{$usuarios['gender'] == 'male' ? ' selected' : '' }}>Homem</option>
                                 <option value="female" {{$usuarios['gender'] == 'female' ? ' selected' : '' }}>Mulher</option>
                             </select>
                             @error('gender')
@@ -53,7 +54,7 @@
                         </div>
                     </div>
                     <div class="pt-3 text-end">
-                        <button type="submit" class="btn btn-md btn-primary">Cadastar <i class="fas fa-plus"></i></button>
+                        <button type="submit" class="btn btn-md btn-primary">Atualizar <i class="fas fa-plus"></i></button>
                         <a href="{{ route('usuario.index') }}" class="btn btn-md btn-danger">Cancelar <i
                                 class="fas fa-ban"></i></a>
                     </div>
