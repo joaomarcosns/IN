@@ -22,10 +22,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Usuario</a>
+                        <a class="nav-link" href="{{route('usuario.index')}}">Usuario</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Posts</a>
+                        <a class="nav-link" href="{{route('post.index')}}">Post</a>Posts</a>
                     </li>
                 </ul>
             </div>
@@ -33,7 +33,7 @@
     </nav>
     <div class="container">
         @if (session()->has('sucesso'))
-            <div class="alert alert-success pt-2">
+            <div class="alert alert-success">
                 {{ session()->get('sucesso') }}
             </div>
         @endif

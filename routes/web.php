@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,12 @@ Route::get('/', function () {
 });
 
 Route::controller(UsuarioController::class)->name('usuario.')->prefix('usuario')->group(function () {
+    Route::get('/', 'index')->name('index');    
+    Route::get('/create', 'create')->name('create');    
+    Route::post('/store', 'store')->name('store');    
+});
+
+Route::controller(PostController::class)->name('post.')->prefix('post')->group(function () {
     Route::get('/', 'index')->name('index');    
     Route::get('/create', 'create')->name('create');    
     Route::post('/store', 'store')->name('store');    

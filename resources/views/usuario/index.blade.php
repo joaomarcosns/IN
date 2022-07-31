@@ -10,7 +10,7 @@
         @foreach ($usuarios as $usuario)
             <div class="col-md-6 pt-2 pb-2">
                 <ul class="list-group">
-                    @if (session()->get('usuario')['id'] == $usuario['id'])
+                    @if (session()->get('usuario') !== null && session()->get('usuario')['id'] == $usuario['id'])
                         <li
                             class="list-group-item {{ $usuario['status'] == 'active' ? 'bg-primary' : 'bg-danger' }} text-white">
                             {{ $usuario['name'] }} Você
